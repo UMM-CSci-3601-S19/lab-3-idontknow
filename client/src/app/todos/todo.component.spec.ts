@@ -21,22 +21,22 @@ describe('Todo component', () => {
         {
           id: 'kurt_id1',
           owner: 'Kurt',
-          status: false,
+          status: true,
           body: 'In the sun I feel as one',
           category: 'stuff'
         },
         {
-          id: 'pat_id1',
-          owner: 'Pat',
+          id: 'layne_id1',
+          owner: 'Layne',
           status: true,
-          body: 'All in all is all we are',
+          body: 'They come to snuff the rooster',
           category: 'things'
         },
         {
-          id: 'jamie_id1',
-          owner: 'Jamie',
+          id: 'chris_id1',
+          owner: 'Chris',
           status: false,
-          body: 'What should I do',
+          body: 'Show me how to live',
           category: 'things'
         }
       ].find(todo => todo.id === todoId))
@@ -55,15 +55,15 @@ describe('Todo component', () => {
     });
   }));
 
-  it('can retrieve Pats todo by ID', () => {
-    todoComponent.setId('pat_id1');
+  it('can retrieve Kurts todo by ID', () => {
+    todoComponent.setId('kurt_id1');
     expect(todoComponent.todo).toBeDefined();
-    expect(todoComponent.todo.owner).toBe('Pat');
-    expect(todoComponent.todo.category).toBe('things');
+    expect(todoComponent.todo.owner).toBe('Kurt');
+    expect(todoComponent.todo.category).toBe('stuff');
   });
 
-  it('returns undefined for Layne', () => {
-    todoCoponent.setId('layne_id3');
+  it('returns undefined for Scott', () => {
+    todoCoponent.setId('scott_id3');
     expect(todoComponent.todo).not.toBeDefined();
   });
 
