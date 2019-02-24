@@ -61,7 +61,7 @@ describe('Todo list service: ', () => {
     // checked until the mocked HTTP request "returns" a response.
     // This happens when we call req.flush(testUsers) a few lines
     // down.
-    userListService.getTodos().subscribe(
+    todoListService.getTodos().subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 

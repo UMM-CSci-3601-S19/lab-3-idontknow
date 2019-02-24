@@ -4,13 +4,22 @@
       <mat-card-title id="todo-list-title">Todos</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>
+
         <mat-form-field>
-          <input matInput id="todoOwner" #input placeholder="Filter by owner" (input)="todoOwner = $event.target.value">
+          <input matInput id="todoOwner" #input placeholder="Filter by owner"
+                 (input)="todoOwner = $event.target.value">
         </mat-form-field>
+
         <mat-form-field>
           <input matInput id="todoStatus" #input type="String" placeholder="Filter by status"
                  (input)="todoStatus = $event.target.value">
         </mat-form-field>
+
+        <mat-form-field>
+          <input matInput id="todoId" #input type="String" placeholder="Filter by id"
+                 (input)="todoId = $event.target.value">
+        </mat-form-field>
+
         <!--<mat-form-field>-->
         <!--<input matInput id="todoCategory" #input type="text" placeholder="Search for category" (input)="contentChange($event.target.value)">-->
         <!--</mat-form-field>-->
