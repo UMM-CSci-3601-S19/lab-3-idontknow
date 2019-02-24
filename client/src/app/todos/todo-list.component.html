@@ -19,13 +19,17 @@
           <input matInput id="todoId" #input type="String" placeholder="Filter by id"
                  (input)="todoId = $event.target.value">
         </mat-form-field>
+        <mat-form-field>
+          <input matInput body="todoBody" #input type="String" placeholder="Filter by body"
+                 (input)="todoBody = $event.target.value">
+        </mat-form-field>
 
         <!--<mat-form-field>-->
         <!--<input matInput id="todoCategory" #input type="text" placeholder="Search for category" (input)="contentChange($event.target.value)">-->
         <!--</mat-form-field>-->
 
         <mat-accordion *ngIf="todos; else todosError">
-          <mat-expansion-panel #elem [id]="todo.id" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus)">
+          <mat-expansion-panel #elem [id]="todo.id" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus, todoId, todoBody)">
             <mat-expansion-panel-header>
 
               <mat-panel-title matTooltip="id: {{todo.id}} {{todo.id}}">{{todo.id}}{{todo.owner}}</mat-panel-title>

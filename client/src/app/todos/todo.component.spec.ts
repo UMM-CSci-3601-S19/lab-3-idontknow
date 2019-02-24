@@ -10,8 +10,8 @@ describe('Todo component', () => {
   let todoComponent: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
 
-  let userListServiceStub: {
-    getTodoById: (userId: string) => Observable<Todo>
+  let todoListServiceStub: {
+    getTodoById: (todoId: string) => Observable<Todo>
   };
 
   beforeEach(() => {
@@ -63,7 +63,7 @@ describe('Todo component', () => {
   });
 
   it('returns undefined for Scott', () => {
-    todoCoponent.setId('scott_id3');
+    todoComponent.setId('scott_id3');
     expect(todoComponent.todo).not.toBeDefined();
   });
 

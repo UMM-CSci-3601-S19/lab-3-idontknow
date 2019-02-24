@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
   public todoOwner: string;
   public todoStatus: string;
   public todoId: string;
+  public todoBody: string;
 
 
   // Inject the UserListService into this component.
@@ -30,7 +31,7 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  public filterTodos(searchOwner: string, searchStatus: string, searchId: string): Todo[] {
+  public filterTodos(searchOwner: string, searchStatus: string, searchId: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
@@ -40,6 +41,13 @@ export class TodoListComponent implements OnInit {
 
       this.filteredTodos = this.filteredTodos.filter(todo => {
         return !searchOwner || todo.owner.toLowerCase().indexOf(searchOwner) !== -1;
+      });
+    }
+    if (searchBody != null) {
+      searchBody = searchBody.toLocaleLowerCase();
+
+      this.filteredTodos = this.filteredTodos.filter(todo => {
+        return !searchBody || todo.body.toLowerCase().indexOf(searchBody) !== -1;
       });
     }
 
@@ -83,7 +91,7 @@ export class TodoListComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoOwner, this.todoStatus, this.todoId);
+        this.filterTodos(this.todoOwner, this.todoStatus, this.todoId, this.todoBody);
       },
       err => {
         console.log(err);
