@@ -10,7 +10,7 @@ import {Observable} from 'rxjs/Observable';
   providers: []
 })
 
-export class UserListComponent implements OnInit {
+export class TodoListComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
   public todos: Todo[];
   public filteredTodos: Todo[];
@@ -29,11 +29,11 @@ export class UserListComponent implements OnInit {
 
   }
 
-  public filterTodos(searchOwner: string, searchStatus: boolean): Todo[] {
+  public filterTodos(searchOwner: string, searchStatus: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
-    // Filter by name
+    // Filter by owner
     if (searchOwner != null) {
       searchOwner = searchOwner.toLocaleLowerCase();
 
@@ -42,11 +42,18 @@ export class UserListComponent implements OnInit {
       });
     }
 
-    // Filter by age
+    // Filter by status
     if (searchStatus != null) {
-      this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
-        return !searchStatus || (todo.status === searchStatus);
-      });
+      if (searchStatus === 'false') {
+        this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
+          return !searchStatus || (todo.status === false)
+        })
+      }
+      else if (searchStatus === 'true') {
+        this.filteredTodos = this.filteredTodos.filter( (todo: Todo) => {
+          return !searchStatus || (todo.status === true)
+        })
+      }
     }
 
     return this.filteredTodos;
