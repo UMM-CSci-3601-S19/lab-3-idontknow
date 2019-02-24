@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
 
   public userName: string;
   public userAge: number;
+  public userCompany: string;
 
 
   // Inject the UserListService into this component.
@@ -29,7 +30,7 @@ export class UserListComponent implements OnInit {
 
   }
 
-  public filterUsers(searchName: string, searchAge: number): User[] {
+  public filterUsers(searchName: string, searchAge: number, searchCompany: string): User[] {
 
     this.filteredUsers = this.users;
 
@@ -46,6 +47,14 @@ export class UserListComponent implements OnInit {
     if (searchAge != null) {
       this.filteredUsers = this.filteredUsers.filter((user: User) => {
         return !searchAge || (user.age === Number(searchAge));
+      });
+    }
+    // Filter by company
+    if (searchCompany != null) {
+      searchCompany = searchCompany.toLocaleLowerCase();
+
+      this.filteredUsers = this.filteredUsers.filter(user => {
+        return !searchCompany || user.company.toLowerCase().indexOf(searchCompany) !== -1;
       });
     }
 
@@ -67,7 +76,7 @@ export class UserListComponent implements OnInit {
     users.subscribe(
       returnedUsers => {
         this.users = returnedUsers;
-        this.filterUsers(this.userName, this.userAge);
+        this.filterUsers(this.userName, this.userAge, this.userCompany);
       },
       err => {
         console.log(err);

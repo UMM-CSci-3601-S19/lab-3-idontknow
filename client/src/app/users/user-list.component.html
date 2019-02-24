@@ -11,12 +11,12 @@
           <input matInput id="userAge" #input type="number" placeholder="Filter by age"
                  (input)="userAge = $event.target.value">
         </mat-form-field>
-        <!--<mat-form-field>-->
-        <!--<input matInput id="userCompany" #input type="text" placeholder="Search for company" (input)="contentChange($event.target.value)">-->
-        <!--</mat-form-field>-->
+        <mat-form-field>
+        <input matInput id="userCompany" #input type="text" placeholder="Search for company" (input)="userCompany=$event.target.value">
+        </mat-form-field>
 
         <mat-accordion *ngIf="users; else usersError">
-          <mat-expansion-panel #elem [id]="user.email" *ngFor="let user of this.filterUsers(userName, userAge)">
+          <mat-expansion-panel #elem [id]="user.email" *ngFor="let user of this.filterUsers(userName, userAge, userCompany)">
             <mat-expansion-panel-header>
 
               <mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>
