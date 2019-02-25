@@ -55,11 +55,25 @@ describe('Todo component', () => {
     });
   }));
 
-  it('can retrieve Kurts todo by ID', () => {
+  it('can retrieve Kurt\'s todo by ID', () => {
     todoComponent.setId('kurt_id1');
     expect(todoComponent.todo).toBeDefined();
     expect(todoComponent.todo.owner).toBe('Kurt');
     expect(todoComponent.todo.category).toBe('stuff');
+  });
+
+  it('can retrieve Layne\'s todo by ID', () => {
+    todoComponent.setId('layne_id1');
+    expect(todoComponent.todo).toBeDefined();
+    expect(todoComponent.todo.owner).toBe('Layne');
+    expect(todoComponent.todo.status).toBe(true);
+  });
+
+  it('can retrieve Chris\'s todo by ID', () => {
+    todoComponent.setId('chris_id1');
+    expect(todoComponent.todo).toBeDefined();
+    expect(todoComponent.todo.owner).toBe('Chris');
+    expect(todoComponent.todo.body).toBe('Show me how to live');
   });
 
   it('returns undefined for Scott', () => {
