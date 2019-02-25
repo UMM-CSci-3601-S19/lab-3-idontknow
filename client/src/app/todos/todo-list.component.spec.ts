@@ -80,6 +80,10 @@ describe('Todo list', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Layne')).toBe(true);
   });
 
+  it('contain a user named \'Chris\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Layne')).toBe(true);
+  });
+
   it('doesn\'t contain a user named \'Scott\'', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Scott')).toBe(false);
   });
@@ -87,6 +91,7 @@ describe('Todo list', () => {
   it('has two todos in the things category', () => {
     expect(todoList.todos.filter((todo: Todo) => todo.category === 'things').length).toBe(2);
   });
+
   it('todo list filters by owner', () => {
     expect(todoList.filteredTodos.length).toBe(3);
     todoList.todoOwner = 'r';
