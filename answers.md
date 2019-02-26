@@ -7,4 +7,4 @@ By, Ananya Teklu and Nathan Foss
 
 3. Server.java is creating routes between the API and the database, while the app.routes.ts is making the requests from the client to the API. 
 
-4. User-list.component.ts handles the appearance on (HTML/CSS stuff) the page, it’s basically the visible stuff. The user-list.service.ts connects the visual to the API.
+4. 4. User-list.service.ts handles requests, and it's seperate from user-list.component because we want to allow other components to have access to this service. If we put it inside the component, this wouldn't be possible.
