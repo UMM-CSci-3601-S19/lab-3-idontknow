@@ -81,7 +81,7 @@ describe('Todo list', () => {
   });
 
   it('contain a user named \'Chris\'', () => {
-    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Layne')).toBe(true);
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Chris')).toBe(true);
   });
 
   it('doesn\'t contain a user named \'Scott\'', () => {
@@ -102,7 +102,7 @@ describe('Todo list', () => {
 
   it('todo list filters by status', () => {
     expect(todoList.filteredTodos.length).toBe(3);
-    todoList.todoStatus = 'true';
+    todoList.todoStatus = 'complete';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
@@ -110,11 +110,39 @@ describe('Todo list', () => {
 
   it('todo list filters by owner and status', () => {
     expect(todoList.filteredTodos.length).toBe(3);
-    todoList.todoStatus = 'true';
+    todoList.todoStatus = 'complete';
     todoList.todoOwner = 'a';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+  });
+
+  it('todo list filters by status and body', () => {
+    expect(todoList.filteredTodos.length).toBe(3);
+    todoList.todoStatus = 'complete';
+    todoList.todoBody = 'sun';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+  });
+
+  it('todo list filters by owner and body', () => {
+    expect(todoList.filteredTodos.length).toBe(3);
+    todoList.todoOwner = 'a';
+    todoList.todoBody = 'rooster';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+  });
+
+  it('todo list filters by all', () => {
+    expect(todoList.filteredTodos.length).toBe(3);
+    todoList.todoBody = 'the';
+    todoList.todoOwner = 'r';
+    todoList.todoStatus = 'incomplete'
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
   });
 
 });

@@ -24,7 +24,7 @@
           <mat-expansion-panel #elem [id]="todo.id" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus, todoBody)">
             <mat-expansion-panel-header>
 
-              <mat-panel-title matTooltip="id: {{todo.id}} {{todo.id}}">{{todo.id}}{{todo.owner}}</mat-panel-title>
+              <mat-panel-title matTooltip="id: {{todo.id}} {{todo.id}}">{{todo.owner}}</mat-panel-title>
 
             </mat-expansion-panel-header>
             <mat-panel-description>Category: {{todo.category}}</mat-panel-description>
