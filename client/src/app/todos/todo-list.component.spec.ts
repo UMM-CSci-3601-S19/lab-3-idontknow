@@ -135,6 +135,7 @@ describe('Todo list', () => {
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
   });
 
+  // This uses all filters in a combination to test
   it('todo list filters by all', () => {
     expect(todoList.filteredTodos.length).toBe(3);
     todoList.todoBody = 'the';
