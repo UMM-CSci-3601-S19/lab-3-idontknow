@@ -17,8 +17,8 @@ export class TodoListComponent implements OnInit {
 
   public todoOwner: string;
   public todoStatus: string;
-  public todoId: string;
   public todoBody: string;
+
 
 
   // Inject the UserListService into this component.
@@ -31,7 +31,7 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  public filterTodos(searchOwner: string, searchStatus: string, searchId: string, searchBody: string): Todo[] {
+  public filterTodos(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
@@ -43,6 +43,8 @@ export class TodoListComponent implements OnInit {
         return !searchOwner || todo.owner.toLowerCase().indexOf(searchOwner) !== -1;
       });
     }
+
+    // Filter by body
     if (searchBody != null) {
       searchBody = searchBody.toLocaleLowerCase();
 
@@ -51,23 +53,15 @@ export class TodoListComponent implements OnInit {
       });
     }
 
-    // Filter by id
-    if (searchId != null) {
-      searchId = searchId.toLocaleLowerCase();
-
-      this.filteredTodos = this.filteredTodos.filter(todo => {
-        return !searchId || todo.id.toLowerCase().indexOf(searchId) !== -1;
-      });
-    }
 
     // Filter by status
     if (searchStatus != null) {
-      if (searchStatus === 'false') {
+      if (searchStatus === 'incomplete') {
         this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
           return !searchStatus || (todo.status === false)
         })
       }
-      else if (searchStatus === 'true') {
+      else if (searchStatus === 'complete') {
         this.filteredTodos = this.filteredTodos.filter( (todo: Todo) => {
           return !searchStatus || (todo.status === true)
         })
@@ -91,7 +85,7 @@ export class TodoListComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoOwner, this.todoStatus, this.todoId, this.todoBody);
+        this.filterTodos(this.todoOwner, this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);
