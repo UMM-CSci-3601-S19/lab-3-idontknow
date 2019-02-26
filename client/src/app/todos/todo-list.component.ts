@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
   public todoOwner: string;
   public todoStatus: string;
   public todoBody: string;
+  public todoId: string;
 
 
 
@@ -70,10 +71,7 @@ export class TodoListComponent implements OnInit {
     return this.filteredTodos;
   }
 
-  /**
-   * Starts an asynchronous operation to update the users list
-   *
-   */
+
   refreshTodos(): Observable<Todo[]> {
     // Get Users returns an Observable, basically a "promise" that
     // we will get the data from the server.
