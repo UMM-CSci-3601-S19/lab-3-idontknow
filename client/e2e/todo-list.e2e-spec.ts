@@ -1,4 +1,4 @@
-import {browser, protractor} from 'protractor';
+import {browser, protractor, by, element, Key} from 'protractor';
 import {TodoPage} from "./todo-list.po";
 
 let origFn = browser.driver.controlFlow().execute;
@@ -25,13 +25,14 @@ describe('Todo list', () => {
   });
 
 
-  // This is done to make sure we've navigated to the correct page, and grabbed the title
+  // This is done to make sure we've navigated to the correct page, given the title
   it('should get tha value of TodoTitle attribute ', () => {
     page.navigateTo();
     expect(page.getTodoTitle()).toEqual('Todos');
   });
 
 
+  // this tests the filter by owner function
   it('should type owner in the filter and find correct todos', () => {
     page.navigateTo();
     page.typeAnOwner("b");
@@ -39,17 +40,29 @@ describe('Todo list', () => {
     expect(page.getUniqueTodo("588959856f0b82ee93cd93eb")).toEqual("Barry");
     expect(page.getUniqueTodo("58895985fac640cc6cb5f3b0")).toEqual("Roberta");
 
+    // erase the input
     page.backspace();
+
     page.typeAnOwner("r");
     expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry");
     expect(page.getUniqueTodo("5889598528c4748a0292e014")).toEqual("Workman");
 
+    //erase the input
     page.backspace();
+
     page.typeAnOwner("a");
     expect(page.getUniqueTodo("58895985e9aaeaad6292df39")).toEqual("Dawn");
 
+    // erase the input
+    page.backspace();
+
+    // now it should be back to the full list. Fry should be available.
+    expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry");
+
   });
 
+
+  // tests the status filter
   it('should enter status into filter and find the correct todos', () => {
     page.navigateTo();
     page.typeAStatus('com') //this should do nothing to change the full-list
@@ -74,8 +87,19 @@ describe('Todo list', () => {
     expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("Blanche"); // this status is false
     expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry"); // this status is false
 
+    // erase the input
+    for (let i = 0; i < 10; i++) {
+      page.backspace();
+    }
+
+    // back to normal now. Should have todos with either status
+    expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("Blanche"); // this status is false
+    expect(page.getUniqueTodo("58895985ae3b752b124e7663")).toEqual("Fry"); // this status is true
+
   })
 
+
+  // tests body contents filter
   it('should enter body contents into filter and find the correct todos', () => {
     page.navigateTo();
     page.typeBodyContents(' ') //this should do nothing to change the full-list
@@ -92,22 +116,58 @@ describe('Todo list', () => {
     expect(page.getUniqueTodo("58895985c32328e015584db2")).toEqual("Workman"); // this contains 'non no'
     expect(page.getUniqueTodo("58895985ee196f2401e8c52a")).toEqual("Roberta"); // this contains 'non no'
 
+    // erase the input
+    for (let i = 0; i < 6; i++) {
+      page.backspace();
+    }
+
+    // should be a full list again. Find a body without 'non' or 'non no'
+    expect(page.getUniqueTodo("58895985186754887e0381f5")).toEqual("Blanche");
+
   })
 
 
+  // tests a combination of all filters
+  it('should enter owner, status, and body contents into filter and find the correct todos', () => {
+    page.navigateTo();
+    page.typeAnOwner('r')
+    expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry");
+    expect(page.getUniqueTodo("588959856f0b82ee93cd93eb")).toEqual("Barry");
+
+    page.typeAStatus('complete') //this should narrow it down a bit further
+    expect(page.getUniqueTodo("58895985ae3b752b124e7663")).toEqual("Fry");
+    expect(page.getUniqueTodo("588959856f0b82ee93cd93eb")).toEqual("Barry");
+
+    page.typeBodyContents('non no') //this should narrow it down to a single result
+    expect(page.getUniqueTodo("588959856f0b82ee93cd93eb")).toEqual("Barry");
+
+    // erase the input
+    for (let i = 0; i < 6; i++) {
+      page.backspace();
+    }
+
+    page.typeBodyContents('no') //this should expand our results from the previous
+    expect(page.getUniqueTodo("5889598528c4748a0292e014")).toEqual("Workman"); //it's no longer just Barry
+
+    element(by.id('todoStatus')).click();
+    // erase the input
+    for (let i = 0; i < 10; i++) {
+      page.backspace();
+    }
+
+    // now we should have both statuses back
+    expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("Fry"); // status is false
+    expect(page.getUniqueTodo("588959856f0b82ee93cd93eb")).toEqual("Barry"); // status is true
+
+    element(by.id('todoOwner')).click();
+    page.backspace();
+
+    // now owners without the letter 'r' are available.
+    // Remember that 'no' is still being used to filter body.
+    expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("Blanche");
+    expect(page.getUniqueTodo("588959857c7750f73d57dda3")).toEqual("Dawn");
 
 
+  })
 
-  // it('should click on the age 27 times and return 3 elements', () => {
-  //   page.navigateTo();
-  //   page.getUserByAge();
-  //   for (let i = 0; i < 27; i++) {
-  //     page.selectUpKey();
-  //   }
-  //
-  //   expect(page.getUniqueUser("stokesclayton@momentia.com")).toEqual("Stokes Clayton");
-  //
-  //   expect(page.getUniqueUser("merrillparker@escenta.com")).toEqual("Merrill Parker");
-  //
-  // });
 });
