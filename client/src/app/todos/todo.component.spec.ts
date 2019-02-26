@@ -19,27 +19,27 @@ describe('Todo component', () => {
     todoListServiceStub = {
       getTodoById: (todoId: string) => Observable.of([
         {
-          id: 'kurt_id1',
+          _id: 'kurt_id1',
           owner: 'Kurt',
           status: true,
           body: 'In the sun I feel as one',
           category: 'stuff'
         },
         {
-          id: 'layne_id1',
+          _id: 'layne_id1',
           owner: 'Layne',
           status: true,
           body: 'They come to snuff the rooster',
           category: 'things'
         },
         {
-          id: 'chris_id1',
+          _id: 'chris_id1',
           owner: 'Chris',
           status: false,
           body: 'Show me how to live',
           category: 'things'
         }
-      ].find(todo => todo.id === todoId))
+      ].find(todo => todo._id === todoId))
     };
 
     TestBed.configureTestingModule({

@@ -9,21 +9,21 @@ describe('Todo list service: ', () => {
   // A small collection of test todos
   const testTodos: Todo[] = [
     {
-      id: 'kurt_id1',
+      _id: 'kurt_id1',
       owner: 'Kurt',
       status: true,
       body: 'In the sun I feel as one',
       category: 'stuff'
     },
     {
-      id: 'layne_id1',
+      _id: 'layne_id1',
       owner: 'Layne',
       status: true,
       body: 'They come to snuff the rooster',
       category: 'things'
     },
     {
-      id: 'chris_id1',
+      _id: 'chris_id1',
       owner: 'Chris',
       status: false,
       body: 'Show me how to live',
@@ -77,7 +77,7 @@ describe('Todo list service: ', () => {
 
   it('getTodoById() calls api/todos/id', () => {
     const targetTodo: Todo = testTodos[1];
-    const targetId: string = targetTodo.id;
+    const targetId: string = targetTodo._id;
     todoListService.getTodoById(targetId). subscribe(
       todo => expect(todo).toBe(targetTodo)
     );
