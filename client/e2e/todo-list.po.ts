@@ -12,7 +12,7 @@ export class TodoPage {
       element.setAttribute('style', style);
       setTimeout(() => {
         element.setAttribute('style', previous);
-      }, 200);
+      }, 50);
       return "highlighted";
     }
 
@@ -54,9 +54,9 @@ export class TodoPage {
   }
 
   getUniqueTodo(id:string) {
-    let todo = element(by.id('id')).getText();
+    let todo = element(by.id(id)).getText();
 
-    this.highlightElement(by.id('id'));
+    this.highlightElement(by.id(id));
 
     return todo;
   }
