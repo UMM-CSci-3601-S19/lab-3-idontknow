@@ -167,7 +167,12 @@ describe('Todo list', () => {
     expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("Blanche");
     expect(page.getUniqueTodo("588959857c7750f73d57dda3")).toEqual("Dawn");
 
+    element(by.id('todoBody')).click();
+    page.backspace();
+    page.backspace();
 
+    // Now we are back to normal
+    expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("Blanche");
   })
 
 });
