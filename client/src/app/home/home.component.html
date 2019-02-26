@@ -2,10 +2,14 @@
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
       <mat-card-title id="hello-world">{{ this.text }}</mat-card-title>
-      <mat-card-subtitle>this is a card</mat-card-subtitle>
+      <mat-card-subtitle>Welcome to our application!</mat-card-subtitle>
       <mat-divider></mat-divider>
       <mat-card-content>
-        card content
+        The todos can be filtered by owner, status, or body contents. Filtering by status will
+         require the user to enter 'complete' or 'incomplete' to get the appropriate todos.
+        Filtering by owner or body contents is more straightforward and will match any todo with
+        an occurence of the input. For example, searching for owner with 'f' will return todos
+        that are owned by Fry.
       </mat-card-content>
     </mat-card>
   </div>

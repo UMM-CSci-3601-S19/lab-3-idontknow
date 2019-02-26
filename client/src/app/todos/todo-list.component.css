@@ -1,0 +1,11 @@
+#todo-list-title {
+  font-family: monospace;
+  background-color: #dae4e6;
+}
+input {
+  background: #dae4e6;
+}
+
+mat-expansion-panel:hover {
+  background: rgba(3, 169, 244, 0.35);
+}
