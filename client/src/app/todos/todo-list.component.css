@@ -1,5 +1,27 @@
+mat-panel-title {
+
+  font-family: monospace;
+  font-size: large;
+}
+
+
+#addTodo {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+#title input {
+  width: 16%;
+  min-width: 100px;
+}
+
+#list-title {
+  padding-right: 14px;
+}
+
 #todo-list-title {
   font-family: monospace;
+  font-size: xx-large;
   background-color: #dae4e6;
 }
 input {
